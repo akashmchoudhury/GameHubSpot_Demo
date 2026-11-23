@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #000000;
+  --bg-2: #07090a;
+  --fg: #e6ffe9;
+  --neon: #00e635;
+  --neon-soft: rgba(0, 230, 53, 0.25);
+}
+
+html, body { background: var(--bg); color: var(--fg); }
+body {
+  font-family: 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+  background-image:
+    radial-gradient(1200px 500px at 50% -100px, rgba(0,230,53,.12), transparent 70%),
+    linear-gradient(180deg, #000 0%, #04070a 100%);
+  min-height: 100vh;
+}
+
+.font-display { font-family: 'Orbitron', ui-sans-serif, system-ui, sans-serif; letter-spacing: 0.02em; }
+
+/* Neon helpers */
+.text-neon { color: var(--neon); text-shadow: 0 0 6px rgba(0,230,53,.6), 0 0 18px rgba(0,230,53,.35); }
+.text-neon-soft { color: #baffc2; text-shadow: 0 0 4px rgba(0,230,53,.35); }
+.border-neon { border-color: var(--neon); box-shadow: 0 0 8px rgba(0,230,53,.4); }
+.btn-neon {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .55rem 1rem;
+  border: 1px solid var(--neon); color: var(--neon); background: rgba(0,230,53,.05);
+  border-radius: .5rem; font-weight: 600; letter-spacing: .04em;
+  transition: all .18s ease; text-transform: uppercase; font-family: 'Orbitron', sans-serif; font-size: .82rem;
+}
+.btn-neon:hover { background: rgba(0,230,53,.18); box-shadow: 0 0 14px rgba(0,230,53,.6); color: #ffffff; }
+.btn-neon:disabled { opacity: .5; cursor: not-allowed; }
+
+.card-neon {
+  background: linear-gradient(180deg, rgba(10,16,18,.9), rgba(4,8,10,.9));
+  border: 1px solid rgba(0,230,53,.25);
+  border-radius: .9rem;
+  transition: all .2s ease;
+}
+.card-neon:hover {
+  border-color: rgba(0,230,53,.65);
+  box-shadow: 0 0 16px rgba(0,230,53,.25), 0 0 32px rgba(0,230,53,.15);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #04070a; }
+::-webkit-scrollbar-thumb { background: #0d4a1c; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #00b528; }
+
+/* Grid overlay bg */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0,230,53,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,230,53,.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Scan line */
+.scan-line::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,230,53,.25), transparent);
+  width: 40%; animation: scan 2.4s linear infinite; pointer-events: none;
+}
+
+/* Section titles */
+.section-title {
+  font-family: 'Orbitron', sans-serif; font-weight: 700;
+  color: #e9ffee; text-transform: uppercase; letter-spacing: .14em;
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+.section-title::before {
+  content: ""; width: 10px; height: 10px; background: var(--neon);
+  border-radius: 999px; box-shadow: 0 0 10px var(--neon);
+}
+
+.input-neon {
+  background: rgba(0,0,0,.6); border: 1px solid rgba(0,230,53,.3);
+  color: #e6ffe9; border-radius: .5rem; padding: .5rem .8rem;
+  outline: none; transition: all .18s ease;
+}
+.input-neon:focus { border-color: var(--neon); box-shadow: 0 0 10px rgba(0,230,53,.45); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .15rem .55rem; border-radius: 999px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase;
+  background: rgba(0,230,53,.1); color: #baffc2; border: 1px solid rgba(0,230,53,.3);
+}
+
+/* CSS-only marquee — lighter than framer-motion on the always-visible AdBar */
+.marquee-track { animation: marquee 32s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Respect user preference and halt infinite animations when it matters */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-flicker,
+  .animate-scan,
+  .animate-pulseGlow,
+  .animate-marquee {
+    animation: none !important;
+  }
+  * { transition-duration: 0ms !important; }
+}
+
+/* Mask offscreen below-fold sections from paint/layout work until near-viewport */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: 1px 800px; }
