@@ -4,10 +4,10 @@ export function AdBar() {
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
       <div className="relative mx-auto max-w-7xl px-4 py-2 flex items-center gap-3">
         <span className="chip !bg-black !border-neon-500 !text-neon">AD</span>
-        <div className="relative flex-1 overflow-hidden whitespace-nowrap">
-          <div className="marquee-track flex gap-16 whitespace-nowrap will-change-transform">
+        <div className="marquee-mask relative flex-1 overflow-hidden whitespace-nowrap">
+          <div className="marquee-track">
             {[0, 1].map((k) => (
-              <div key={k} className="flex items-center gap-16" aria-hidden={k === 1 ? true : undefined}>
+              <div key={k} className="flex items-center gap-16 pr-16 shrink-0" aria-hidden={k === 1 ? true : undefined}>
                 <AdSlot brand="APPLE" mark="" headline="New M-Series Gaming PCs" sub="Up to 40% faster in next-gen titles. Learn more →" />
                 <AdSlot brand="OMEGA" mark="✦" headline="Omega Elite Controller · 15% OFF" sub="Use code NEON15 at checkout" />
                 <AdSlot brand="WEBMERNIX" mark="" headline="Skyforge Saga pre-orders live" sub="Reserve now, play May 2026" />
